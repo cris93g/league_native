@@ -9,6 +9,7 @@ import {
   Image,
 } from 'react-native';
 import axios from 'axios';
+import {Link} from 'react-router-native';
 class Profile extends Component {
   constructor(props) {
     super(props);
@@ -36,7 +37,8 @@ class Profile extends Component {
   }
   render() {
     const {summoner} = this.state;
-
+    let add = summoner.wins + summoner.losses;
+    let winP = summoner.wins / add;
     return (
       <>
         <View
@@ -110,6 +112,7 @@ class Profile extends Component {
               <Text>{`Username: ${summoner.summonerName}`}</Text>
               <Text>{`wins: ${summoner.wins}`}</Text>
               <Text>{`looses: ${summoner.losses}`}</Text>
+              <Text>{`win percentage: ${winP}`}</Text>
             </>
           ) : (
             <Text>no username found</Text>
@@ -121,45 +124,51 @@ class Profile extends Component {
             justifyContent: 'center',
             alignItems: 'stretch',
           }}>
-          <Text
-            style={{
-              display: 'flex',
-              marginTop: 10,
-              marginLeft: 'auto',
-              textAlign: 'center',
-              fontWeight: 'bold',
-              fontSize: 15,
-              marginRight: 'auto',
-              borderRadius: 20,
-              justifyContent: 'center',
-              alignItems: 'center',
-              height: 50,
-              width: 125,
-              borderColor: 'gray',
-              borderWidth: 0.5,
-              backgroundColor: 'lightblue',
-            }}>
-            Match History
-          </Text>
-          <Text
-            style={{
-              marginTop: 10,
-              marginLeft: 'auto',
-              textAlign: 'center',
-              fontWeight: 'bold',
-              fontSize: 15,
-              marginRight: 'auto',
-              borderRadius: 20,
-              justifyContent: 'center',
-              alignItems: 'center',
-              height: 50,
-              width: 125,
-              borderColor: 'gray',
-              borderWidth: 0.5,
-              backgroundColor: 'lightblue',
-            }}>
-            In Game
-          </Text>
+          <>
+            <Link to={`/history/${summoner.accountId}`}>
+              <Text
+                style={{
+                  display: 'flex',
+                  marginTop: 10,
+                  marginLeft: 'auto',
+                  textAlign: 'center',
+                  fontWeight: 'bold',
+                  fontSize: 15,
+                  marginRight: 'auto',
+                  borderRadius: 20,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: 50,
+                  width: 125,
+                  borderColor: 'gray',
+                  borderWidth: 0.5,
+                  backgroundColor: 'lightblue',
+                }}>
+                Match History
+              </Text>
+            </Link>
+            <Link to={`/ingame`}>
+              <Text
+                style={{
+                  marginTop: 10,
+                  marginLeft: 'auto',
+                  textAlign: 'center',
+                  fontWeight: 'bold',
+                  fontSize: 15,
+                  marginRight: 'auto',
+                  borderRadius: 20,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: 50,
+                  width: 125,
+                  borderColor: 'gray',
+                  borderWidth: 0.5,
+                  backgroundColor: 'lightblue',
+                }}>
+                In Game
+              </Text>
+            </Link>
+          </>
         </View>
       </>
     );
